@@ -1,0 +1,10 @@
+{
+  "primary": [
+    { "id": "services", "label": { "en": "Services", "es": "Servicios" }, "routeId": "services" },
+    { "id": "process", "label": { "en": "Process", "es": "Proceso" }, "routeId": "process" },
+    { "id": "about", "label": { "en": "About", "es": "Nosotros" }, "routeId": "about" },
+    { "id": "faq", "label": { "en": "FAQ", "es": "Preguntas frecuentes" }, "routeId": "faq" },
+    { "id": "contact", "label": { "en": "Contact", "es": "Contacto" }, "routeId": "contact" }
+  ],
+  "cta": { "label": { "en": "Book a discovery call", "es": "Reservar una reunión inicial" }, "action": "booking" }
+}

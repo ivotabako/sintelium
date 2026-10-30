@@ -1,0 +1,52 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 0.85rem 1.4rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+
+.button:hover { transform: translateY(-1px); }
+.button:focus-visible, .nav-link:focus-visible, .text-link:focus-visible, .brand:focus-visible, .language-switch a:focus-visible, .faq-detail summary:focus-visible, .nav-toggle:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.button-primary {
+  background: var(--color-teal-500);
+  color: white;
+  box-shadow: var(--shadow-card);
+}
+
+.button-secondary {
+  background: transparent;
+  color: white;
+  border-color: rgba(255,255,255,0.25);
+}
+
+.site-header .button-primary, .site-header .button-secondary {
+  color: white;
+}
+
+.site-header .button-primary {
+  background: var(--color-teal-600);
+}
+
+.site-header .button-secondary {
+  background: var(--color-forest-950);
+  border-color: transparent;
+}
+
+.site-header .nav-cta .button {
+  padding-inline: 1rem;
+  min-height: 40px;
+}
+
+@media (max-width: 760px) {
+  .button { width: 100%; }
+  .cta-row { width: 100%; }
+}

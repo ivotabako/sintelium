@@ -1,0 +1,8 @@
+{
+  "steps": [
+    { "id": "discover", "number": 1, "title": { "en": "Discover", "es": "Descubrir" }, "description": { "en": "Understand business goals, constraints, existing systems, and risks.", "es": "Comprender objetivos, limitaciones, sistemas existentes y riesgos." } },
+    { "id": "design", "number": 2, "title": { "en": "Design", "es": "Diseñar" }, "description": { "en": "Define architecture, priorities, success criteria, and a delivery plan.", "es": "Definir la arquitectura, prioridades, criterios de éxito y un plan de entrega." } },
+    { "id": "build", "number": 3, "title": { "en": "Build & integrate", "es": "Desarrollar e integrar" }, "description": { "en": "Implement, integrate, test, and validate in close collaboration with stakeholders.", "es": "Implementar, integrar y probar en estrecha colaboración con las partes interesadas." } },
+    { "id": "validate", "number": 4, "title": { "en": "Validate & evolve", "es": "Validar y evolucionar" }, "description": { "en": "Measure outcomes, document learning, and plan the next improvements.", "es": "Medir resultados, documentar aprendizajes y planificar las próximas mejoras." } }
+  ]
+}
