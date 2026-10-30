@@ -1,0 +1,116 @@
+{
+  "categories": [
+    {
+      "id": "ai-transformation",
+      "priority": 1,
+      "featured": true,
+      "routes": { "en": "/en/services/ai-transformation/", "es": "/es/servicios/transformacion-ia/" },
+      "title": { "en": "AI Transformation & Agentic Automation", "es": "Transformación con IA y automatización agéntica" },
+      "summary": { "en": "Turn AI opportunities into reliable agents, workflows, and integrated systems.", "es": "Convierte las oportunidades de IA en agentes, flujos de trabajo y sistemas integrados fiables." },
+      "icon": "agent-network",
+      "relatedCategoryIds": ["data-integrations", "security-quality"],
+      "subservices": [
+        { "id": "ai-opportunity-assessment", "title": { "en": "AI opportunity assessment", "es": "Evaluación de oportunidades de IA" }, "description": { "en": "Inventory workflows, assess feasibility, prioritize use cases, and translate AI potential into a realistic roadmap.", "es": "Inventariamos flujos de trabajo, evaluamos la viabilidad, priorizamos casos de uso y convertimos el potencial de IA en una hoja de ruta realista." }, "deliverables": { "en": ["Opportunity matrix", "Feasibility assessment", "Roadmap"], "es": ["Matriz de oportunidades", "Evaluación de viabilidad", "Hoja de ruta"] } },
+        { "id": "ai-adoption-strategy", "title": { "en": "AI adoption strategy", "es": "Estrategia de adopción de IA" }, "description": { "en": "Choose high-value use cases, align governance, and prepare a phased rollout aligned to business priorities.", "es": "Elegimos casos de uso de alto valor, alineamos la gobernanza y preparamos un despliegue por fases adaptado a las prioridades del negocio." }, "deliverables": { "en": ["Use-case prioritization", "Operating model", "Rollout plan"], "es": ["Priorización de casos de uso", "Modelo operativo", "Plan de despliegue"] } },
+        { "id": "custom-ai-agents", "title": { "en": "Custom AI agents", "es": "Agentes de IA a medida" }, "description": { "en": "Design task-focused agents with approved tools, permissions, state management, and human approval patterns.", "es": "Diseñamos agentes orientados a tareas con herramientas autorizadas, permisos, gestión del estado y patrones de aprobación humana." }, "deliverables": { "en": ["Agent architecture", "Working prototype", "Evaluation plan"], "es": ["Arquitectura del agente", "Prototipo funcional", "Plan de evaluación"] } },
+        { "id": "multi-agent-systems", "title": { "en": "Multi-agent systems", "es": "Sistemas multiagente" }, "description": { "en": "Coordinate specialized agents, route decisions, and recover from failure with orchestration patterns that match business processes.", "es": "Coordinamos agentes especializados, direccionamos decisiones y recuperamos fallos con patrones de orquestación alineados con los procesos empresariales." }, "deliverables": { "en": ["Agent orchestration design", "Failure recovery plan", "Operational handoff"], "es": ["Diseño de orquestación", "Plan de recuperación ante fallos", "Entrega operativa"] } }
+      ]
+    },
+    {
+      "id": "software-engineering",
+      "priority": 2,
+      "featured": true,
+      "routes": { "en": "/en/services/software-engineering/", "es": "/es/servicios/ingenieria-software/" },
+      "title": { "en": "Custom Software Engineering", "es": "Ingeniería de software a medida" },
+      "summary": { "en": "Build dependable applications, APIs, and platforms tailored to your real operating model.", "es": "Desarrolla aplicaciones, APIs y plataformas fiables adaptadas a tu modelo operativo real." },
+      "icon": "code-stack",
+      "relatedCategoryIds": ["performance-cloud", "advisory"],
+      "subservices": [
+        { "id": "product-discovery", "title": { "en": "Product discovery and technical requirements", "es": "Descubrimiento de producto y requisitos técnicos" }, "description": { "en": "Clarify the problem, desired outcomes, constraints, and technical assumptions before implementation starts.", "es": "Aclaramos el problema, los resultados deseados, las limitaciones y los supuestos técnicos antes de iniciar la implementación." }, "deliverables": { "en": ["Discovery brief", "Requirements backlog", "Design decisions"], "es": ["Resumen de descubrimiento", "Backlog de requisitos", "Decisiones de diseño"] } },
+        { "id": "web-app-development", "title": { "en": "Web application and dashboard development", "es": "Desarrollo de aplicaciones web y dashboards" }, "description": { "en": "Design user-facing interfaces and product experiences that fit real usage patterns and stakeholder needs.", "es": "Diseñamos interfaces para usuarios y experiencias de producto que encajan con los patrones reales de uso y las necesidades de las partes interesadas." }, "deliverables": { "en": ["UI design system", "Responsive front end", "Feature delivery"], "es": ["Sistema de diseño UI", "Front end responsive", "Entrega de funcionalidades"] } },
+        { "id": "backend-api-engineering", "title": { "en": "Backend and API engineering", "es": "Ingeniería de backend y APIs" }, "description": { "en": "Create robust back-end services, integrations, and API contracts that support business operations and scale.", "es": "Creamos servicios backend robustos, integraciones y contratos de API que soportan operaciones empresariales y escalan." }, "deliverables": { "en": ["API contracts", "Service layer", "Integration tests"], "es": ["Contratos de API", "Capa de servicio", "Pruebas de integración"] } },
+        { "id": "saas-platform-architecture", "title": { "en": "SaaS platform architecture and implementation", "es": "Arquitectura e implementación de plataformas SaaS" }, "description": { "en": "Develop scalable, maintainable product foundations with careful design for growth, operational resilience, and change.", "es": "Desarrollamos bases de producto escalables y mantenibles con un diseño cuidadoso para crecimiento, resiliencia operativa y cambios." }, "deliverables": { "en": ["Architecture review", "Implementation plan", "Production configuration"], "es": ["Revisión de arquitectura", "Plan de implementación", "Configuración de producción"] } }
+      ]
+    },
+    {
+      "id": "modernization",
+      "priority": 3,
+      "featured": true,
+      "routes": { "en": "/en/services/modernization/", "es": "/es/servicios/modernizacion/" },
+      "title": { "en": "Modernization & Architecture", "es": "Modernización y arquitectura" },
+      "summary": { "en": "Reduce friction, technical debt, and risk with pragmatic modernization and system redesign.", "es": "Reduce la fricción, la deuda técnica y el riesgo con una modernización pragmática y rediseño de sistemas." },
+      "icon": "system-upgrade",
+      "relatedCategoryIds": ["performance-cloud", "advisory"],
+      "subservices": [
+        { "id": "legacy-audits", "title": { "en": "Legacy application audits and modernization roadmaps", "es": "Auditorías de aplicaciones heredadas y hojas de ruta de modernización" }, "description": { "en": "Assess an existing codebase, map constraints, and build a staged plan that balances business continuity and change.", "es": "Evaluamos una base de código existente, mapeamos restricciones y construimos un plan por etapas que equilibra continuidad del negocio y cambio." }, "deliverables": { "en": ["Assessment report", "Risk register", "Target-state roadmap"], "es": ["Informe de evaluación", "Registro de riesgos", "Hoja de ruta de estado objetivo"] } },
+        { "id": "refactoring", "title": { "en": "Codebase restructuring and large-scale refactoring", "es": "Reestructuración de código y refactorización a gran escala" }, "description": { "en": "Reshape a confusing codebase into coherent modules without losing operational stability or delivery momentum.", "es": "Reformamos una base de código caótica en módulos coherentes sin perder estabilidad operativa ni impulso de entrega." }, "deliverables": { "en": ["Modularization plan", "Refactored components", "Regression strategy"], "es": ["Plan de modularización", "Componentes refactorizados", "Estrategia de regresión"] } },
+        { "id": "architecture-reviews", "title": { "en": "Architecture reviews and system redesign", "es": "Revisiones de arquitectura y rediseño de sistemas" }, "description": { "en": "Challenge assumptions, validate design decisions, and define a more maintainable target architecture.", "es": "Desafiamos supuestos, validamos decisiones de diseño y definimos una arquitectura objetivo más mantenible." }, "deliverables": { "en": ["Architecture review", "Decision records", "Target design"], "es": ["Revisión de arquitectura", "Registros de decisiones", "Diseño objetivo"] } },
+        { "id": "migration-planning", "title": { "en": "Cloud-readiness and migration planning", "es": "Preparación para la nube y planificación de migración" }, "description": { "en": "Prepare a sensible migration approach with phased execution, rollback options, and technical guardrails.", "es": "Preparamos un enfoque de migración sensato con ejecución por fases, opciones de reversión y salvaguardas técnicas." }, "deliverables": { "en": ["Migration plan", "Risk analysis", "Deployment checklist"], "es": ["Plan de migración", "Análisis de riesgos", "Lista de verificación de despliegue"] } }
+      ]
+    },
+    {
+      "id": "performance-cloud",
+      "priority": 4,
+      "featured": true,
+      "routes": { "en": "/en/services/performance-cloud/", "es": "/es/servicios/rendimiento-cloud/" },
+      "title": { "en": "Performance, Cloud & Reliability", "es": "Rendimiento, cloud y fiabilidad" },
+      "summary": { "en": "Improve responsiveness, resilience, and operational confidence under pressure.", "es": "Mejora la capacidad de respuesta, la resiliencia y la confianza operativa bajo presión." },
+      "icon": "cloud-reliability",
+      "relatedCategoryIds": ["modernization", "security-quality"],
+      "subservices": [
+        { "id": "performance-profiling", "title": { "en": "Performance profiling and bottleneck analysis", "es": "Perfilado de rendimiento y análisis de cuellos de botella" }, "description": { "en": "Measure real behavior, find bottlenecks, and translate them into prioritized actions.", "es": "Medimos el comportamiento real, detectamos cuellos de botella y los convertimos en acciones priorizadas." }, "deliverables": { "en": ["Baseline metrics", "Profiling findings", "Improvement backlog"], "es": ["Métricas base", "Hallazgos de perfilado", "Backlog de mejoras"] } },
+        { "id": "scaling-architecture", "title": { "en": "Scalability architecture and resilience testing", "es": "Arquitectura escalable y pruebas de resiliencia" }, "description": { "en": "Review concurrency, capacity, and recovery paths so systems can scale without breaking under load.", "es": "Revisamos concurrencia, capacidad y rutas de recuperación para que los sistemas puedan escalar sin romperse bajo carga." }, "deliverables": { "en": ["Scaling design", "Load-test plan", "Resilience checklist"], "es": ["Diseño de escalado", "Plan de pruebas de carga", "Lista de verificación de resiliencia"] } },
+        { "id": "cloud-infrastructure", "title": { "en": "Cloud infrastructure architecture and migration", "es": "Arquitectura de infra cloud y migración" }, "description": { "en": "Design cloud patterns that improve consistency, recoverability, and operational clarity.", "es": "Diseñamos patrones cloud que mejoran la consistencia, recuperabilidad y claridad operativa." }, "deliverables": { "en": ["Infrastructure design", "Migration plan", "Environment configuration"], "es": ["Diseño de infraestructura", "Plan de migración", "Configuración de entornos"] } },
+        { "id": "monitoring-ops", "title": { "en": "Monitoring, logs, metrics, and distributed tracing", "es": "Monitorización, logs, métricas y trazado distribuido" }, "description": { "en": "Provide practical observability so incidents, bottlenecks, and platform health are visible to teams.", "es": "Proporcionamos observabilidad práctica para que incidentes, cuellos de botella y salud de la plataforma sean visibles para los equipos." }, "deliverables": { "en": ["Dashboards", "Alerting decisions", "Runbooks"], "es": ["Dashboards", "Decisiones de alertado", "Runbooks"] } }
+      ]
+    },
+    {
+      "id": "security-quality",
+      "priority": 5,
+      "featured": true,
+      "routes": { "en": "/en/services/security-quality/", "es": "/es/servicios/seguridad-calidad/" },
+      "title": { "en": "Security & Quality Engineering", "es": "Seguridad y calidad del software" },
+      "summary": { "en": "Reduce technical risk with secure engineering, testing, and remediation support.", "es": "Reduce el riesgo técnico con ingeniería segura, pruebas y apoyo en remediación." },
+      "icon": "shield-quality",
+      "relatedCategoryIds": ["ai-transformation", "performance-cloud"],
+      "subservices": [
+        { "id": "secure-code-review", "title": { "en": "Secure code review and threat modeling", "es": "Revisión de seguridad del código y modelado de amenazas" }, "description": { "en": "Review architecture and implementation patterns for risk, privilege boundaries, and exposure points.", "es": "Revisamos arquitectura y patrones de implementación para identificar riesgos, límites de privilegios y puntos de exposición." }, "deliverables": { "en": ["Threat model", "Reviewed findings", "Prioritized remediation"], "es": ["Modelo de amenazas", "Hallazgos revisados", "Remediación priorizada"] } },
+        { "id": "dependency-review", "title": { "en": "Dependency and software supply-chain vulnerability review", "es": "Revisión de dependencias y vulnerabilidades de la cadena de suministro de software" }, "description": { "en": "Assess third-party risks, patch paths, and upgrade strategies without creating operational noise.", "es": "Evaluamos riesgos de terceros, rutas de parcheo y estrategias de actualización sin crear ruido operativo." }, "deliverables": { "en": ["Dependency inventory", "Risk summary", "Upgrade recommendations"], "es": ["Inventario de dependencias", "Resumen de riesgos", "Recomendaciones de actualización"] } },
+        { "id": "test-strategy", "title": { "en": "Automated unit, integration, and end-to-end testing", "es": "Pruebas automatizadas unitarias, de integración y E2E" }, "description": { "en": "Increase confidence through test suites that cover important workflows, regressions, and change boundaries.", "es": "Aumentamos la confianza con suites de pruebas que cubren flujos importantes, regresiones y límites de cambio." }, "deliverables": { "en": ["Test strategy", "Automated suites", "Regression coverage"], "es": ["Estrategia de pruebas", "Suites automatizadas", "Cobertura de regresión"] } },
+        { "id": "ai-security", "title": { "en": "Secure AI application reviews", "es": "Revisiones de seguridad de aplicaciones con IA" }, "description": { "en": "Assess prompt injection risk, tool permission boundaries, user access, and guardrail design before broader deployment.", "es": "Evaluamos el riesgo de inyección de prompts, límites de permisos de herramientas, acceso de usuarios y diseño de guardrails antes de un despliegue más amplio." }, "deliverables": { "en": ["AI security review", "Remediation plan", "Guardrail checklist"], "es": ["Revisión de seguridad de IA", "Plan de remediación", "Lista de comprobación de guardrails"] } }
+      ]
+    },
+    {
+      "id": "data-integrations",
+      "priority": 6,
+      "featured": true,
+      "routes": { "en": "/en/services/data-integrations/", "es": "/es/servicios/datos-integraciones/" },
+      "title": { "en": "Data & Integrations", "es": "Ingeniería de datos e integraciones" },
+      "summary": { "en": "Connect data sources, streamline workflows, and build AI-ready information flows.", "es": "Conecta fuentes de datos, agiliza flujos de trabajo y crea flujos de información preparados para IA." },
+      "icon": "data-connect",
+      "relatedCategoryIds": ["ai-transformation", "software-engineering"],
+      "subservices": [
+        { "id": "data-architecture", "title": { "en": "Data architecture and modeling", "es": "Arquitectura de datos y modelado" }, "description": { "en": "Define models, access patterns, and ownership boundaries for useful, maintainable data systems.", "es": "Definimos modelos, patrones de acceso y límites de propiedad para sistemas de datos útiles y mantenibles." }, "deliverables": { "en": ["Data model", "Ownership map", "Integration blueprint"], "es": ["Modelo de datos", "Mapa de propiedad", "Plano de integración"] } },
+        { "id": "etl-elt-pipelines", "title": { "en": "ETL/ELT pipelines and workflow orchestration", "es": "Pipelines ETL/ELT y orquestación de flujos" }, "description": { "en": "Design workflows that move data reliably between sources, stores, and operational systems.", "es": "Diseñamos flujos que mueven datos de forma fiable entre fuentes, almacenes y sistemas operativos." }, "deliverables": { "en": ["Pipeline design", "Operational runbooks", "Validation checks"], "es": ["Diseño de pipeline", "Runbooks operativos", "Comprobaciones de validación"] } },
+        { "id": "api-integration", "title": { "en": "API integration and data exchange design", "es": "Integración de APIs y diseño de intercambio de datos" }, "description": { "en": "Connect business systems with clear contracts, error handling, and security boundaries.", "es": "Conectamos sistemas empresariales con contratos claros, manejo de errores y límites de seguridad." }, "deliverables": { "en": ["Integration adapters", "Data contracts", "Error-handling specs"], "es": ["Adaptadores de integración", "Contratos de datos", "Especificaciones de manejo de errores"] } },
+        { "id": "ai-ready-knowledge", "title": { "en": "AI-ready knowledge-base ingestion and transformation", "es": "Ingesta y transformación de base de conocimiento lista para IA" }, "description": { "en": "Prepare information for retrieval and agentic workflows with privacy-aware ingestion and validation steps.", "es": "Preparamos información para recuperación y flujos agénticos con ingesta y validación respetuosas con la privacidad." }, "deliverables": { "en": ["Ingestion design", "Data mapping", "Indexing and validation plan"], "es": ["Diseño de ingesta", "Mapeo de datos", "Plan de indexación y validación"] } }
+      ]
+    },
+    {
+      "id": "advisory",
+      "priority": 7,
+      "featured": true,
+      "routes": { "en": "/en/services/advisory/", "es": "/es/servicios/consultoria/" },
+      "title": { "en": "Advisory & Engineering Enablement", "es": "Consultoría y capacitación técnica" },
+      "summary": { "en": "Align team capability, architecture decisions, and execution strategy with business needs.", "es": "Alinea la capacidad del equipo, las decisiones de arquitectura y la estrategia de ejecución con las necesidades del negocio." },
+      "icon": "advisory",
+      "relatedCategoryIds": ["software-engineering", "ai-transformation"],
+      "subservices": [
+        { "id": "technology-strategy", "title": { "en": "Technology strategy and solution architecture", "es": "Estrategia tecnológica y arquitectura de soluciones" }, "description": { "en": "Define the best-fit technical path for ambitious initiatives and constrained teams.", "es": "Definimos la vía técnica más adecuada para iniciativas ambiciosas y equipos con limitaciones." }, "deliverables": { "en": ["Architecture options", "Roadmap", "Recommendation brief"], "es": ["Opciones de arquitectura", "Hoja de ruta", "Resumen de recomendaciones"] } },
+        { "id": "cto-advisory", "title": { "en": "Fractional technical leadership / CTO advisory", "es": "Liderazgo técnico fraccionado / asesoría de CTO" }, "description": { "en": "Support executive decisions with practical engineering perspective and delivery guidance.", "es": "Apoyamos decisiones ejecutivas con perspectiva técnica práctica y orientación de entrega." }, "deliverables": { "en": ["Decision support", "Capability review", "Execution guidance"], "es": ["Apoyo a decisiones", "Revisión de capacidades", "Orientación de ejecución"] } },
+        { "id": "ai-enablement", "title": { "en": "AI adoption enablement for development teams", "es": "Habilitación de adopción de IA para equipos de desarrollo" }, "description": { "en": "Equip teams with practical AI workflows, governance patterns, and delivery guardrails.", "es": "Capacitamos a los equipos con flujos de trabajo de IA prácticos, patrones de gobernanza y salvaguardas de entrega." }, "deliverables": { "en": ["Workshop sessions", "Playbook", "Governance recommendations"], "es": ["Sesiones de taller", "Manual de referencia", "Recomendaciones de gobernanza"] } },
+        { "id": "engineering-standards", "title": { "en": "Engineering standards, ADRs, and documentation", "es": "Estándares de ingeniería, ADR y documentación" }, "description": { "en": "Strengthen team consistency with architecture decision records, standards, and reusable guidance.", "es": "Fortalecemos la consistencia del equipo con registros de decisiones de arquitectura, estándares y guías reutilizables." }, "deliverables": { "en": ["Standards package", "Architecture decisions", "Knowledge base"], "es": ["Paquete de estándares", "Decisiones de arquitectura", "Base de conocimiento"] } }
+      ]
+    }
+  ]
+}

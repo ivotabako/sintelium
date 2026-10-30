@@ -1,0 +1,23 @@
+{
+  "brand": "Sintelium",
+  "domain": "https://sintelium.io",
+  "defaultLocale": "en",
+  "locales": ["en", "es"],
+  "contact": {
+    "email": null,
+    "bookingUrl": null
+  },
+  "social": {
+    "linkedin": null,
+    "github": null
+  },
+  "organization": {
+    "legalName": null,
+    "registeredAddress": null,
+    "registrationNumber": null
+  },
+  "logo": {
+    "mark": "/images/logo-mark.svg",
+    "horizontal": "/images/logo-horizontal.svg"
+  }
+}

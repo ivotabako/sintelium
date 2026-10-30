@@ -1,0 +1,10 @@
+{
+  "home": { "routes": { "en": "/en/", "es": "/es/" } },
+  "services": { "routes": { "en": "/en/services/", "es": "/es/servicios/" } },
+  "about": { "routes": { "en": "/en/about/", "es": "/es/nosotros/" } },
+  "process": { "routes": { "en": "/en/process/", "es": "/es/proceso/" } },
+  "faq": { "routes": { "en": "/en/faq/", "es": "/es/preguntas-frecuentes/" } },
+  "contact": { "routes": { "en": "/en/contact/", "es": "/es/contacto/" } },
+  "privacy": { "routes": { "en": "/en/privacy/", "es": "/es/privacidad/" } },
+  "legal": { "routes": { "en": "/en/legal/", "es": "/es/aviso-legal/" } }
+}

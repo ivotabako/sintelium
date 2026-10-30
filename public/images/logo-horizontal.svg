@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120">
+  <rect width="420" height="120" rx="26" fill="#0B2422"/>
+  <path d="M24 18c15-12 44-10 56 8 11 17 2 35-17 45l-16 10c-11 7-16 19-12 30 5 14 20 22 36 18l-5 12c-20 9-44 4-57-16-13-20-9-44 8-60l17-11c12-8 17-18 13-31-5-14-18-19-39-12l6-11Z" fill="#1C9A8E"/>
+  <text x="120" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="50" font-weight="700" fill="#ffffff">Sintelium</text>
+</svg>

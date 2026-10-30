@@ -1,0 +1,41 @@
+{
+  "defaults": {
+    "siteName": "Sintelium",
+    "ogImage": "/images/og-default.svg",
+    "robots": "index,follow"
+  },
+  "pages": {
+    "home": {
+      "title": { "en": "Sintelium | AI Transformation & Agentic Automation", "es": "Sintelium | Transformación con IA y automatización agéntica" },
+      "description": { "en": "AI agents, intelligent automation, and software engineering for ambitious businesses.", "es": "Agentes de IA, automatización inteligente e ingeniería de software para empresas con ambición." }
+    },
+    "services": {
+      "title": { "en": "Sintelium Services | AI, software, modernization, and reliability", "es": "Servicios de Sintelium | IA, software, modernización y fiabilidad" },
+      "description": { "en": "Explore service categories spanning AI transformation, software engineering, architecture, security, cloud, and operations.", "es": "Explore categorías de servicios que abarcan transformación con IA, ingeniería de software, arquitectura, seguridad, cloud y operaciones." }
+    },
+    "about": {
+      "title": { "en": "About Sintelium | Practical AI and engineering consultancy", "es": "Sobre Sintelium | Consultoría práctica de IA e ingeniería" },
+      "description": { "en": "Sintelium brings together thoughtful architecture, AI strategy, and dependable delivery for meaningful business outcomes.", "es": "Sintelium combina arquitectura reflexiva, estrategia de IA y entrega fiable para lograr resultados empresariales significativos." }
+    },
+    "process": {
+      "title": { "en": "Sintelium Process | Discover, design, build, and evolve", "es": "Proceso de Sintelium | Descubrir, diseñar, desarrollar y evolucionar" },
+      "description": { "en": "A practical delivery process for AI and software initiatives from assessment through validation and improvement.", "es": "Un proceso práctico de entrega para iniciativas de IA y software desde la evaluación hasta la validación y la mejora." }
+    },
+    "faq": {
+      "title": { "en": "FAQ | Sintelium", "es": "Preguntas frecuentes | Sintelium" },
+      "description": { "en": "Frequently asked questions about AI transformation, engineering services, and engagements.", "es": "Preguntas frecuentes sobre transformación con IA, servicios de ingeniería y colaboraciones." }
+    },
+    "contact": {
+      "title": { "en": "Contact Sintelium | Book a discovery call", "es": "Contacto con Sintelium | Reservar una reunión inicial" },
+      "description": { "en": "Tell us about your goals, challenge, and next step. We can explore AI opportunities or an engineering initiative.", "es": "Cuéntenos sus objetivos, desafíos y próximo paso. Podemos explorar oportunidades de IA o una iniciativa de ingeniería." }
+    },
+    "privacy": {
+      "title": { "en": "Privacy | Sintelium", "es": "Privacidad | Sintelium" },
+      "description": { "en": "Privacy and data handling statement template pending legal review.", "es": "Plantilla de declaración de privacidad y tratamiento de datos pendiente de revisión legal." }
+    },
+    "legal": {
+      "title": { "en": "Legal notice | Sintelium", "es": "Aviso legal | Sintelium" },
+      "description": { "en": "Legal notice template for publication review.", "es": "Plantilla de aviso legal para revisión previa a publicación." }
+    }
+  }
+}
