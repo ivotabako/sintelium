@@ -17,15 +17,15 @@
 }
 
 .button-primary {
-  background: var(--color-teal-500);
+  background: linear-gradient(135deg, var(--color-teal-500), var(--color-teal-600));
   color: white;
   box-shadow: var(--shadow-card);
 }
 
 .button-secondary {
-  background: transparent;
+  background: rgba(255,255,255,0.08);
   color: white;
-  border-color: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.24);
 }
 
 .site-header .button-primary, .site-header .button-secondary {
@@ -33,7 +33,7 @@
 }
 
 .site-header .button-primary {
-  background: var(--color-teal-600);
+  background: linear-gradient(135deg, var(--color-teal-500), var(--color-teal-600));
 }
 
 .site-header .button-secondary {
