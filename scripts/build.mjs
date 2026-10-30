@@ -21,6 +21,13 @@ const legal = JSON.parse(fs.readFileSync(path.join(contentDir, 'legal.json'), 'u
 
 const categoryMap = new Map(servicesData.categories.map((category) => [category.id, category]));
 
+function toProjectUrl(pathname) {
+  const basePath = '/sintelium';
+  if (!pathname) return basePath;
+  if (pathname === '/') return basePath;
+  return `${basePath}${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
+}
+
 function escapeHtml(value = '') {
   return String(value)
     .replace(/&/g, '&amp;')
@@ -36,10 +43,10 @@ function localeText(value, locale) {
 
 function routeFor(pageId, locale) {
   const route = pages[pageId]?.routes?.[locale];
-  if (route) return route;
+  if (route) return toProjectUrl(route);
   const category = categoryMap.get(pageId);
-  if (category && category.routes) return category.routes[locale];
-  return locale === 'en' ? '/en/' : '/es/';
+  if (category && category.routes) return toProjectUrl(category.routes[locale]);
+  return locale === 'en' ? '/sintelium/en/' : '/sintelium/es/';
 }
 
 function getContactCta(locale) {
@@ -701,8 +708,8 @@ function generateRootPages() {
         <h1>Build smarter systems. Move business forward.</h1>
         <p class="lead">Practical AI transformation and software engineering for ambitious teams.</p>
         <div class="cta-row">
-          <a class="button button-primary" href="/en/">English</a>
-          <a class="button button-secondary" href="/es/">Español</a>
+          <a class="button button-primary" href="/sintelium/en/">English</a>
+          <a class="button button-secondary" href="/sintelium/es/">Español</a>
         </div>
       </section>
     </main>
