@@ -4,7 +4,7 @@ A bilingual static marketing website for Sintelium built with Vite, vanilla Java
 
 ## Prerequisites
 
-- Node.js 18+
+- Node.js 20.19+ (Node.js 24 tested)
 - npm
 
 ## Install
@@ -50,10 +50,26 @@ npm run dev
 
 ## Production deployment
 
-The build produces a static `dist` output for GitHub Pages. The CI workflow should run checks and publish the generated artifact.
+The build produces a static `dist` output for GitHub Pages. Pull requests run validation, tests, build, and route/asset checks. Pushes to main publish the checked artifact.
 
 ## Notes
 
 - Legal pages intentionally remain templates until the owner approves legal content.
 - Contact links cannot be fabricated; use approved configuration only.
 - No backend or runtime API is required for essential content.
+
+## Design and implementation reference
+
+The original supplied brief is preserved in [docs/WEBSITE_SPECIFICATION.md](docs/WEBSITE_SPECIFICATION.md). See [docs/DESIGN_REVIEW.md](docs/DESIGN_REVIEW.md) for the redesign, verification, and remaining gaps. The brief describes the intended product; it is not a claim that every acceptance criterion is implemented.
+
+Shared design tokens are in `src/styles/tokens.css`; the current visual system and responsive refinements are in `src/styles/refinements.css`. The technical diagram is an accessible inline SVG in the page generator. Keep its text translated. No fonts or images load from third parties.
+
+## Hosting paths
+
+`content/site.json` is the single source for `domain` (origin only) and `basePath` (no trailing slash). The existing project deployment uses `https://ivotabako.github.io` with `/sintelium`. Local preview is at `http://127.0.0.1:4173/sintelium/`. Run `npm run build` then `npm run preview`; use this production preview for final visual checks. `npm run dev` generates pages once; restart it after editing JSON or generator templates. CSS and JS edits update through Vite.
+
+For the intended custom domain, set `domain` to `https://sintelium.io` and `basePath` to an empty string, rebuild, and configure the verified domain in GitHub Pages. `public/CNAME` is included only for domain-root builds. Project builds remove it from output to avoid claiming the custom domain prematurely. Vite outputs localized pages directly into `dist`; finalization must never overwrite bundled HTML with raw templates.
+
+## Launch configuration still required
+
+Contact email/booking URL are unset and legal pages are templates. Current builds allow these draft conditions explicitly so design review and the existing deployment remain possible; this is not a production-readiness gate. Do not treat a passing build as legal/contact approval. Complete the owner checklist in the specification before public launch.

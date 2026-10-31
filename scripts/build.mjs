@@ -21,11 +21,9 @@ const legal = JSON.parse(fs.readFileSync(path.join(contentDir, 'legal.json'), 'u
 
 const categoryMap = new Map(servicesData.categories.map((category) => [category.id, category]));
 
-function toProjectUrl(pathname) {
-  const basePath = '/sintelium';
-  if (!pathname) return basePath;
-  if (pathname === '/') return basePath;
-  return `${basePath}${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
+function toProjectUrl(pathname = '/') {
+  const base = (site.basePath || '').replace(/\/$/, '');
+  return `${base}${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
 }
 
 function escapeHtml(value = '') {
@@ -46,7 +44,7 @@ function routeFor(pageId, locale) {
   if (route) return toProjectUrl(route);
   const category = categoryMap.get(pageId);
   if (category && category.routes) return toProjectUrl(category.routes[locale]);
-  return locale === 'en' ? '/sintelium/en/' : '/sintelium/es/';
+  return toProjectUrl(pages.home.routes[locale]);
 }
 
 function getContactCta(locale) {
@@ -61,7 +59,7 @@ function getContactCta(locale) {
   return '';
 }
 
-function buildNav(locale) {
+function buildNav(locale, pageId = 'home') {
   const navLinks = navigation.primary
     .map((item) => {
       const href = routeFor(item.routeId, locale);
@@ -71,24 +69,22 @@ function buildNav(locale) {
 
   const languageSwitch = `
     <div class="language-switch" aria-label="Language switcher">
-      <a href="${routeFor('home', 'en')}" aria-label="English" class="${locale === 'en' ? 'is-active' : ''}">EN</a>
-      <a href="${routeFor('home', 'es')}" aria-label="Español" class="${locale === 'es' ? 'is-active' : ''}">ES</a>
+      <a href="${routeFor(pageId, 'en')}" aria-label="English" class="${locale === 'en' ? 'is-active' : ''}">EN</a>
+      <a href="${routeFor(pageId, 'es')}" aria-label="Español" class="${locale === 'es' ? 'is-active' : ''}">ES</a>
     </div>
   `;
 
   const cta = getContactCta(locale);
-  const mobileToggle = '<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">Menu</button>';
+  const mobileToggle = `<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="${locale === 'en' ? 'Open menu' : 'Abrir menú'}">${locale === 'en' ? 'Menu' : 'Menú'}</button>`;
 
   return `
     <header class="site-header">
       <div class="container nav-shell">
         <a class="brand" href="${routeFor('home', locale)}" aria-label="Sintelium home">
-          <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-label="Sintelium">
-            <path d="M18 16c8-6 21-6 28 2 5 6 4 14-3 18l-7 5c-4 3-6 8-4 13 3 7 11 9 18 5l2 7c-9 6-23 6-31-2-6-7-6-17 2-24l7-5c4-3 6-8 4-13-2-7-11-10-18-5l-4-6Z" fill="currentColor"></path>
-          </svg>
+          <img class="brand-mark" src="${toProjectUrl('/images/logo-mark.svg')}" width="36" height="36" alt="" />
           <span>Sintelium</span>
         </a>
-        <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <nav id="site-nav" class="site-nav" aria-label="${locale === 'en' ? 'Main navigation' : 'Navegación principal'}">
           ${navLinks}
         </nav>
         <div class="nav-actions">
@@ -101,9 +97,9 @@ function buildNav(locale) {
   `;
 }
 
-function buildFooter(locale) {
+function buildFooter(locale, pageId = 'home') {
   const serviceSections = servicesData.categories.map((category) => `
-    <li><a href="${category.routes[locale]}">${localeText(category.title, locale)}</a></li>
+    <li><a href="${toProjectUrl(category.routes[locale])}">${localeText(category.title, locale)}</a></li>
   `).join('');
 
   const year = new Date().getFullYear();
@@ -137,8 +133,8 @@ function buildFooter(locale) {
           <ul class="footer-list">
             <li><a href="${privacyHref}">${locale === 'en' ? 'Privacy' : 'Privacidad'}</a></li>
             <li><a href="${legalHref}">${locale === 'en' ? 'Legal notice' : 'Aviso legal'}</a></li>
-            <li><a href="${routeFor('home', 'en')}">EN</a></li>
-            <li><a href="${routeFor('home', 'es')}">ES</a></li>
+            <li><a href="${routeFor(pageId, 'en')}">EN</a></li>
+            <li><a href="${routeFor(pageId, 'es')}">ES</a></li>
           </ul>
         </div>
       </div>
@@ -149,7 +145,7 @@ function buildFooter(locale) {
   `;
 }
 
-function renderCommonHead({ locale, title, description, canonicalUrl, pageType = 'website' }) {
+function renderCommonHead({ locale, title, description, canonicalUrl, pageId = 'home' }) {
   return `
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -161,16 +157,16 @@ function renderCommonHead({ locale, title, description, canonicalUrl, pageType =
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:url" content="${canonicalUrl}" />
-    <meta property="og:image" content="${site.domain}/images/og-default.svg" />
+    <meta property="og:image" content="${site.domain}${toProjectUrl('/images/og-default.svg')}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
-    <meta name="twitter:image" content="${site.domain}/images/og-default.svg" />
+    <meta name="twitter:image" content="${site.domain}${toProjectUrl('/images/og-default.svg')}" />
     <meta property="og:site_name" content="Sintelium" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate" hreflang="en" href="${site.domain}${routeFor('home', 'en')}" />
-    <link rel="alternate" hreflang="es" href="${site.domain}${routeFor('home', 'es')}" />
-    <link rel="alternate" hreflang="x-default" href="${site.domain}/" />
+    <link rel="icon" href="${toProjectUrl('/favicon.svg')}" type="image/svg+xml" />
+    <link rel="alternate" hreflang="en" href="${site.domain}${routeFor(pageId, 'en')}" />
+    <link rel="alternate" hreflang="es" href="${site.domain}${routeFor(pageId, 'es')}" />
+    <link rel="alternate" hreflang="x-default" href="${site.domain}${toProjectUrl('/')}" />
     ${locale === 'en' ? `<meta http-equiv="content-language" content="en">` : `<meta http-equiv="content-language" content="es">`}
     <script type="module" src="/src/main.js"></script>
     <script type="application/ld+json">
@@ -178,9 +174,9 @@ function renderCommonHead({ locale, title, description, canonicalUrl, pageType =
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         "name": "Sintelium",
-        "url": "${site.domain}",
+        "url": "${site.domain}${toProjectUrl('/')}",
         "areaServed": "Worldwide",
-        "description": "${escapeHtml(description)}"
+        "description": ${JSON.stringify(description).replace(/</g, '\\u003c')}
       }
     </script>
   `;
@@ -193,16 +189,15 @@ function renderPage({ locale, canonicalUrl, title, description, pageId, contentH
   return `<!DOCTYPE html>
 <html lang="${locale}">
   <head>
-    ${renderCommonHead({ locale, title: pageTitle, description: pageDescription, canonicalUrl })}
+    ${renderCommonHead({ locale, title: pageTitle, description: pageDescription, canonicalUrl, pageId })}
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
-    ${buildNav(locale)}
+    <a class="skip-link" href="#main-content">${locale === 'en' ? 'Skip to content' : 'Saltar al contenido'}</a>
+    ${buildNav(locale, pageId)}
     <main id="main-content" class="page-shell">
       ${contentHtml}
     </main>
-    ${buildFooter(locale)}
-    <script type="module" src="/src/main.js"></script>
+    ${buildFooter(locale, pageId)}
   </body>
 </html>`;
 }
@@ -218,10 +213,10 @@ function renderHome(locale) {
 
   const featuredItems = servicesData.categories.slice(0, 6).map((category) => `
     <article class="card card-service">
-      <span class="eyebrow-mini">${localeText(category.title, locale)}</span>
+      <span class="service-icon" aria-hidden="true">↗</span>
       <h3>${localeText(category.title, locale)}</h3>
       <p>${localeText(category.summary, locale)}</p>
-      <a href="${category.routes[locale]}" class="text-link">${locale === 'en' ? 'Learn more' : 'Saber más'}</a>
+      <a href="${toProjectUrl(category.routes[locale])}" class="text-link">${locale === 'en' ? 'Learn more' : 'Saber más'}</a>
     </article>
   `).join('');
 
@@ -262,26 +257,20 @@ function renderHome(locale) {
           <h1>${hero.title}</h1>
           <p class="lead">${hero.lead}</p>
           <div class="cta-row">
-            ${ctaHtml || '<span class="cta-row-note">Contact details pending owner confirmation.</span>'}
+            ${ctaHtml || `<a class="button button-primary" href="${routeFor('process', locale)}">${locale === 'en' ? 'How we work' : 'Cómo trabajamos'} <span aria-hidden="true">↗</span></a>`}
             <a class="button button-secondary" href="${routeFor('services', locale)}">${locale === 'en' ? 'Explore our services' : 'Explorar servicios'}</a>
           </div>
           <p class="trust-line">${locale === 'en' ? 'Practical engineering. Clear collaboration. Solutions designed to last.' : 'Ingeniería práctica. Colaboración clara. Soluciones pensadas para durar.'}</p>
         </div>
-        <div class="hero-visual">
-          <svg viewBox="0 0 520 400" role="img" aria-label="AI workflow overview">
-            <rect x="26" y="30" width="150" height="76" rx="16" fill="#DDF4EF"/>
-            <text x="48" y="70" fill="#0B2422" font-size="18" font-weight="700">Inputs</text>
-            <text x="48" y="92" fill="#46534F" font-size="14">APIs, data</text>
-            <rect x="182" y="140" width="170" height="96" rx="20" fill="#147D73"/>
-            <text x="205" y="182" fill="#fff" font-size="18" font-weight="700">AI agents</text>
-            <text x="205" y="205" fill="#DDF4EF" font-size="14">tools + workflow</text>
-            <rect x="344" y="258" width="150" height="88" rx="16" fill="#DDF4EF"/>
-            <text x="370" y="300" fill="#0B2422" font-size="18" font-weight="700">Business</text>
-            <text x="370" y="322" fill="#46534F" font-size="14">approval loop</text>
-            <path d="M176 84 H244 L244 140 M244 160 H182 M316 236 L356 258 M380 232 L380 258" stroke="#1C9A8E" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <circle cx="180" cy="75" r="8" fill="#0B2422"/>
-            <circle cx="244" cy="140" r="8" fill="#147D73"/>
-            <circle cx="356" cy="258" r="8" fill="#147D73"/>
+        <div class="hero-visual"><div class="diagram-label"><span class="status-dot"></span>${locale === 'en' ? 'FROM OPPORTUNITY TO OPERATION' : 'DE LA OPORTUNIDAD A LA OPERACIÓN'}</div>
+          <svg viewBox="0 0 520 400" role="img" aria-label="${locale === 'en' ? 'Data flows through AI agents and human review into connected systems' : 'Los datos pasan por agentes de IA y revisión humana a sistemas conectados'}">
+            <defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#38534d"/></pattern></defs>
+            <rect width="520" height="400" fill="url(#grid)"/>
+            <g fill="none" stroke="#76cbb3" stroke-width="2"><path d="M140 98H260V164M260 236V302H380"/><path d="M140 98V302H210" stroke-dasharray="5 7"/></g>
+            <g fill="#173c33" stroke="#527f6d"><rect x="32" y="62" width="160" height="72" rx="8"/><rect x="180" y="164" width="180" height="72" rx="8"/><rect x="300" y="266" width="190" height="72" rx="8"/></g>
+            <g fill="#e8f8ed" font-size="17" font-family="system-ui" font-weight="600"><text x="52" y="104">${locale === 'en' ? '01 / Your data' : '01 / Tus datos'}</text><text x="200" y="206">${locale === 'en' ? '02 / AI agents' : '02 / Agentes IA'}</text><text x="320" y="308">${locale === 'en' ? '03 / Real outcomes' : '03 / Resultados'}</text></g>
+            <circle cx="260" cy="302" r="25" fill="#b9ebc9"/><path d="m250 302 7 7 13-15" fill="none" stroke="#103529" stroke-width="3"/>
+            <text x="40" y="370" fill="#b1c9bc" font-size="13" font-family="system-ui">${locale === 'en' ? 'Connected systems. Human oversight.' : 'Sistemas conectados. Supervisión humana.'}</text>
           </svg>
         </div>
       </div>
@@ -340,12 +329,12 @@ function renderHome(locale) {
       <div class="container narrow">
         <h2>${locale === 'en' ? "Let's discuss what your business needs next." : 'Hablemos de lo que necesita tu negocio a continuación.'}</h2>
         <p>${locale === 'en' ? 'Whether you\'re exploring AI or improving a complex software system, we\'ll start with the problem and work toward a practical solution.' : 'Ya sea que estés explorando IA o mejorando un sistema de software complejo, empezaremos por el problema y avanzaremos hacia una solución práctica.'}</p>
-        ${ctaHtml ? `<div class="cta-row center">${ctaHtml}</div>` : '<p class="notice">Contact details are pending owner approval.</p>'}
+        ${ctaHtml ? `<div class="cta-row center">${ctaHtml}</div>` : `<p class="notice">${locale === 'en' ? 'Contact details will be available soon.' : 'Los datos de contacto estarán disponibles próximamente.'}</p>`}
       </div>
     </section>
   `;
 
-  return renderPage({ locale, canonicalUrl: `${site.domain}${routeFor('home', locale)}`, title: localeText(seo.pages.home.title, locale), description: localeText(seo.pages.home.description, locale), pageId: 'home', contentHtml: renderHome(locale) });
+
 }
 
 function renderGenericPage({ locale, pageId, title, lead, bodySections }) {
@@ -372,13 +361,13 @@ function renderGenericPage({ locale, pageId, title, lead, bodySections }) {
 function renderServicesIndex(locale) {
   const cards = servicesData.categories.map((category) => `
     <article class="card card-service">
-      <span class="eyebrow-mini">${localeText(category.title, locale)}</span>
+      <span class="service-icon" aria-hidden="true">↗</span>
       <h3>${localeText(category.title, locale)}</h3>
       <p>${localeText(category.summary, locale)}</p>
       <ul class="mini-list">
         ${category.subservices.slice(0, 3).map((sub) => `<li>${localeText(sub.title, locale)}</li>`).join('')}
       </ul>
-      <a href="${category.routes[locale]}" class="text-link">${locale === 'en' ? 'See category' : 'Ver categoría'}</a>
+      <a href="${toProjectUrl(category.routes[locale])}" class="text-link">${locale === 'en' ? 'See category' : 'Ver categoría'}</a>
     </article>
   `).join('');
 
@@ -428,7 +417,7 @@ function renderServicePage(locale, category) {
   const related = (category.relatedCategoryIds || []).map((id) => {
     const item = categoryMap.get(id);
     if (!item) return '';
-    return `<li><a href="${item.routes[locale]}">${localeText(item.title, locale)}</a></li>`;
+    return `<li><a href="${toProjectUrl(item.routes[locale])}">${localeText(item.title, locale)}</a></li>`;
   }).join('');
 
   const faqSubset = faqs.items.filter((item) => item.featured === true || item.category === 'general').slice(0, 3).map((item) => `
@@ -485,7 +474,7 @@ function renderServicePage(locale, category) {
     </div>
   `;
 
-  return renderPage({ locale, canonicalUrl: `${site.domain}${category.routes[locale]}`, title: localeText(category.title, locale), description: lead, pageId: 'services', contentHtml: body });
+  return renderPage({ locale, canonicalUrl: `${site.domain}${toProjectUrl(category.routes[locale])}`, title: localeText(category.title, locale), description: lead, pageId: category.id, contentHtml: `<section class="section"><div class="container">${body}</div></section>` });
 }
 
 function renderAbout(locale) {
@@ -548,7 +537,7 @@ function renderContact(locale) {
         ${bookingCta || ''}
         ${emailCta || ''}
       </div>
-      ${!(bookingCta || emailCta) ? '<p class="notice">Contact details are pending owner approval.</p>' : ''}
+      ${!(bookingCta || emailCta) ? `<p class="notice">${locale === 'en' ? 'Contact details will be available soon.' : 'Los datos de contacto estarán disponibles próximamente.'}</p>` : ''}
     </div>
   `;
   return renderGenericPage({ locale, pageId: 'contact', title: locale === 'en' ? 'Let\'s talk about your next project.' : 'Hablemos de tu próximo proyecto.', lead, bodySections: body });
@@ -610,210 +599,23 @@ function writeFile(filePath, content) {
 }
 
 function generateSitemap() {
-  const routes = new Set();
-  for (const locale of ['en', 'es']) {
-    routes.add(`${site.domain}${routeFor('home', locale)}`);
-    routes.add(`${site.domain}${routeFor('services', locale)}`);
-    routes.add(`${site.domain}${routeFor('about', locale)}`);
-    routes.add(`${site.domain}${routeFor('process', locale)}`);
-    routes.add(`${site.domain}${routeFor('faq', locale)}`);
-    routes.add(`${site.domain}${routeFor('contact', locale)}`);
-    routes.add(`${site.domain}${routeFor('privacy', locale)}`);
-    routes.add(`${site.domain}${routeFor('legal', locale)}`);
-  }
-
-  for (const category of servicesData.categories) {
-    routes.add(`${site.domain}${category.routes.en}`);
-    routes.add(`${site.domain}${category.routes.es}`);
-  }
-
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  ${Array.from(routes).map((url) => {
-    const localeUrl = new URL(url);
-    const localePath = localeUrl.pathname;
-    const lang = localePath.startsWith('/es/') ? 'es' : 'en';
-    const alt = lang === 'es' ? `${site.domain}${routeFor('home', 'en')}` : `${site.domain}${routeFor('home', 'es')}`;
-    return `
-  <url>
-    <loc>${url}</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="${site.domain}${routeFor('home', 'en')}" />
-    <xhtml:link rel="alternate" hreflang="es" href="${site.domain}${routeFor('home', 'es')}" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="${site.domain}/" />
-  </url>`;
-  }).join('')}
-</urlset>`;
-
-  writeFile(path.join(root, 'dist', 'sitemap.xml'), sitemap);
-  writeFile(path.join(root, 'public', 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.domain}/sitemap.xml\n`);
-}
-
-function copyPublicAssets() {
-  const publicDir = path.join(root, 'public');
-  for (const entry of fs.readdirSync(publicDir, { withFileTypes: true })) {
-    const fullPath = path.join(publicDir, entry.name);
-    if (entry.isDirectory()) {
-      fs.cpSync(fullPath, path.join(root, 'dist', entry.name), { recursive: true });
-    } else {
-      fs.copyFileSync(fullPath, path.join(root, 'dist', entry.name));
-    }
-  }
-}
-
-function generateRootPages() {
-  fs.rmSync(generatedDir, { recursive: true, force: true });
-  ensureDir(generatedDir);
-  const routes = [];
-  const pageMap = new Map();
-  const staticPages = ['home', 'services', 'about', 'process', 'faq', 'contact', 'privacy', 'legal'];
-
-  for (const pageId of staticPages) {
-    for (const locale of ['en', 'es']) {
-      const routePath = routeFor(pageId, locale);
-      routes.push({ pageId, locale, routePath });
-      pageMap.set(`${pageId}:${locale}`, routePath);
-    }
-  }
-
-  for (const category of servicesData.categories) {
-    for (const locale of ['en', 'es']) {
-      const routePath = category.routes[locale];
-      routes.push({ pageId: category.id, locale, routePath });
-      pageMap.set(`${category.id}:${locale}`, routePath);
-    }
-  }
-
-  const rootIndex = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sintelium</title>
-    <meta name="description" content="AI transformation and engineering consultancy." />
-    <link rel="canonical" href="${site.domain}/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Sintelium" />
-    <meta property="og:description" content="AI transformation and engineering consultancy." />
-    <meta property="og:image" content="${site.domain}/images/og-default.svg" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate" hreflang="en" href="${site.domain}/en/" />
-    <link rel="alternate" hreflang="es" href="${site.domain}/es/" />
-    <link rel="alternate" hreflang="x-default" href="${site.domain}/" />
-    <script type="module" src="/src/main.js"></script>
-  </head>
-  <body>
-    <main class="landing-root">
-      <section class="landing-panel">
-        <p class="eyebrow">Sintelium</p>
-        <h1>Build smarter systems. Move business forward.</h1>
-        <p class="lead">Practical AI transformation and software engineering for ambitious teams.</p>
-        <div class="cta-row">
-          <a class="button button-primary" href="/sintelium/en/">English</a>
-          <a class="button button-secondary" href="/sintelium/es/">Español</a>
-        </div>
-      </section>
-    </main>
-  </body>
-</html>`;
-
-  writeFile(path.join(generatedDir, 'index.html'), rootIndex);
-
-  const generatedFiles = new Map();
-  generatedFiles.set('home:en', renderHome('en'));
-  generatedFiles.set('home:es', renderHome('es'));
-  generatedFiles.set('services:en', renderServicesIndex('en'));
-  generatedFiles.set('services:es', renderServicesIndex('es'));
-  generatedFiles.set('about:en', renderAbout('en'));
-  generatedFiles.set('about:es', renderAbout('es'));
-  generatedFiles.set('process:en', renderProcess('en'));
-  generatedFiles.set('process:es', renderProcess('es'));
-  generatedFiles.set('faq:en', renderFaq('en'));
-  generatedFiles.set('faq:es', renderFaq('es'));
-  generatedFiles.set('contact:en', renderContact('en'));
-  generatedFiles.set('contact:es', renderContact('es'));
-  generatedFiles.set('privacy:en', renderPrivacy('en'));
-  generatedFiles.set('privacy:es', renderPrivacy('es'));
-  generatedFiles.set('legal:en', renderLegal('en'));
-  generatedFiles.set('legal:es', renderLegal('es'));
-
-  for (const category of servicesData.categories) {
-    generatedFiles.set(`${category.id}:en`, renderServicePage('en', category));
-    generatedFiles.set(`${category.id}:es`, renderServicePage('es', category));
-  }
-
-  const fileMap = [
-    { pageId: 'home', locale: 'en', file: path.join(generatedDir, 'en', 'index.html') },
-    { pageId: 'home', locale: 'es', file: path.join(generatedDir, 'es', 'index.html') },
-    { pageId: 'services', locale: 'en', file: path.join(generatedDir, 'en', 'services', 'index.html') },
-    { pageId: 'services', locale: 'es', file: path.join(generatedDir, 'es', 'servicios', 'index.html') },
-    { pageId: 'about', locale: 'en', file: path.join(generatedDir, 'en', 'about', 'index.html') },
-    { pageId: 'about', locale: 'es', file: path.join(generatedDir, 'es', 'nosotros', 'index.html') },
-    { pageId: 'process', locale: 'en', file: path.join(generatedDir, 'en', 'process', 'index.html') },
-    { pageId: 'process', locale: 'es', file: path.join(generatedDir, 'es', 'proceso', 'index.html') },
-    { pageId: 'faq', locale: 'en', file: path.join(generatedDir, 'en', 'faq', 'index.html') },
-    { pageId: 'faq', locale: 'es', file: path.join(generatedDir, 'es', 'preguntas-frecuentes', 'index.html') },
-    { pageId: 'contact', locale: 'en', file: path.join(generatedDir, 'en', 'contact', 'index.html') },
-    { pageId: 'contact', locale: 'es', file: path.join(generatedDir, 'es', 'contacto', 'index.html') },
-    { pageId: 'privacy', locale: 'en', file: path.join(generatedDir, 'en', 'privacy', 'index.html') },
-    { pageId: 'privacy', locale: 'es', file: path.join(generatedDir, 'es', 'privacidad', 'index.html') },
-    { pageId: 'legal', locale: 'en', file: path.join(generatedDir, 'en', 'legal', 'index.html') },
-    { pageId: 'legal', locale: 'es', file: path.join(generatedDir, 'es', 'aviso-legal', 'index.html') }
-  ];
-
-  const pageContent = {};
-  pageContent['home:en'] = renderHome('en');
-  pageContent['home:es'] = renderHome('es');
-  pageContent['services:en'] = renderServicesIndex('en');
-  pageContent['services:es'] = renderServicesIndex('es');
-  pageContent['about:en'] = renderAbout('en');
-  pageContent['about:es'] = renderAbout('es');
-  pageContent['process:en'] = renderProcess('en');
-  pageContent['process:es'] = renderProcess('es');
-  pageContent['faq:en'] = renderFaq('en');
-  pageContent['faq:es'] = renderFaq('es');
-  pageContent['contact:en'] = renderContact('en');
-  pageContent['contact:es'] = renderContact('es');
-  pageContent['privacy:en'] = renderPrivacy('en');
-  pageContent['privacy:es'] = renderPrivacy('es');
-  pageContent['legal:en'] = renderLegal('en');
-  pageContent['legal:es'] = renderLegal('es');
-
-  for (const category of servicesData.categories) {
-    pageContent[`${category.id}:en`] = renderServicePage('en', category);
-    pageContent[`${category.id}:es`] = renderServicePage('es', category);
-  }
-
-  for (const listItem of fileMap) {
-    const contentKey = `${listItem.pageId}:${listItem.locale}`;
-    writeFile(listItem.file, pageContent[contentKey]);
-  }
-
-  for (const category of servicesData.categories) {
-    writeFile(path.join(generatedDir, category.routes.en.replace(/^\//, '').replace(/\/$/, ''), 'index.html'), pageContent[`${category.id}:en`]);
-    writeFile(path.join(generatedDir, category.routes.es.replace(/^\//, '').replace(/\/$/, ''), 'index.html'), pageContent[`${category.id}:es`]);
-  }
-
-  writeFile(path.join(generatedDir, '404.html'), render404('en'));
-  writeFile(path.join(generatedDir, 'es', '404.html'), render404('es'));
-  writeFile(path.join(root, 'dist', '404.html'), render404('en'));
-}
-
-function developPublic() {
-  const distDir = path.join(root, 'dist');
-  ensureDir(distDir);
-  const publicDir = path.join(root, 'public');
-  fs.cpSync(publicDir, distDir, { recursive: true });
-  fs.cpSync(path.join(generatedDir), distDir, { recursive: true });
+  const entries = [...Object.entries(pages), ...servicesData.categories.map(c => [c.id, c])];
+  const urls = entries.flatMap(([id]) => ['en', 'es'].map(locale => `<url><loc>${site.domain}${routeFor(id, locale)}</loc>${['en', 'es'].map(lang => `<xhtml:link rel="alternate" hreflang="${lang}" href="${site.domain}${routeFor(id, lang)}" />`).join('')}</url>`));
+  writeFile(path.join(generatedDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${urls.join('')}</urlset>`);
 }
 
 function main() {
   validateJson();
-  ensureDir(path.join(root, 'src', 'generated'));
-  generateRootPages();
-  copyPublicAssets();
-  fs.writeFileSync(path.join(root, 'dist', 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.domain}/sitemap.xml\n`, 'utf8');
-  fs.writeFileSync(path.join(root, 'dist', 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n</urlset>\n`, 'utf8');
+  ensureDir(generatedDir);
+  const renderers = { home: locale => renderPage({ locale, pageId: 'home', canonicalUrl: `${site.domain}${routeFor('home', locale)}`, contentHtml: renderHome(locale) }), services: renderServicesIndex, about: renderAbout, process: renderProcess, faq: renderFaq, contact: renderContact, privacy: renderPrivacy, legal: renderLegal };
+  for (const [id, page] of Object.entries(pages)) {
+    for (const locale of ['en', 'es']) writeFile(path.join(generatedDir, page.routes[locale], 'index.html'), renderers[id](locale));
+  }
+  for (const category of servicesData.categories) {
+    for (const locale of ['en', 'es']) writeFile(path.join(generatedDir, category.routes[locale], 'index.html'), renderServicePage(locale, category));
+  }
+  writeFile(path.join(generatedDir, 'index.html'), renderers.home('en'));
+  writeFile(path.join(generatedDir, '404.html'), render404('en'));
   generateSitemap();
 }
-
 main();

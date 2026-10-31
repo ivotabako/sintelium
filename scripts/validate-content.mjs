@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const root = path.resolve(process.cwd());
 const contentDir = path.join(root, 'content');
@@ -114,7 +115,7 @@ function validateJsonStructure(node, label) {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   try {
     validateJson();
   } catch (error) {
