@@ -19,6 +19,8 @@ const useCases = JSON.parse(fs.readFileSync(path.join(contentDir, 'use-cases.jso
 const seo = JSON.parse(fs.readFileSync(path.join(contentDir, 'seo.json'), 'utf8'));
 const legal = JSON.parse(fs.readFileSync(path.join(contentDir, 'legal.json'), 'utf8'));
 
+const themeInit = fs.readFileSync(path.join(root, 'src', 'theme-init.js'), 'utf8');
+
 const categoryMap = new Map(servicesData.categories.map((category) => [category.id, category]));
 
 function toProjectUrl(pathname = '/') {
@@ -81,13 +83,17 @@ function buildNav(locale, pageId = 'home') {
     <header class="site-header">
       <div class="container nav-shell">
         <a class="brand" href="${routeFor('home', locale)}" aria-label="Sintelium home">
-          <img class="brand-mark" src="${toProjectUrl('/images/logo-mark.svg')}" width="36" height="36" alt="" />
+          <span class="brand-symbol"><img class="brand-mark brand-mark-light" src="${toProjectUrl('/images/logo-mark.svg')}" width="36" height="36" alt="" /><img class="brand-mark brand-mark-dark" src="${toProjectUrl('/images/logo-mark-reversed.svg')}" width="36" height="36" alt="" /></span>
           <span>Sintelium</span>
         </a>
         <nav id="site-nav" class="site-nav" aria-label="${locale === 'en' ? 'Main navigation' : 'Navegación principal'}">
           ${navLinks}
         </nav>
         <div class="nav-actions">
+          <button class="theme-toggle" type="button" aria-label="${locale === 'en' ? 'Dark theme' : 'Tema oscuro'}" aria-pressed="false" hidden>
+            <svg class="theme-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg>
+            <svg class="theme-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+          </button>
           ${languageSwitch}
           ${cta ? `<div class="nav-cta">${cta}</div>` : ''}
           ${mobileToggle}
@@ -151,7 +157,9 @@ function renderCommonHead({ locale, title, description, canonicalUrl, pageId = '
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeHtml(description)}" />
-    <meta name="theme-color" content="#0B2422" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fbfcf8" />
+    <script>${themeInit}</script>
     <link rel="canonical" href="${canonicalUrl}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${escapeHtml(title)}" />

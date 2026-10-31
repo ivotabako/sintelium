@@ -73,3 +73,9 @@ For the intended custom domain, set `domain` to `https://sintelium.io` and `base
 ## Launch configuration still required
 
 Contact email/booking URL are unset and legal pages are templates. Current builds allow these draft conditions explicitly so design review and the existing deployment remain possible; this is not a production-readiness gate. Do not treat a passing build as legal/contact approval. Complete the owner checklist in the specification before public launch.
+
+## Light and dark themes
+
+The header sun/moon button toggles the full site palette in either language. On the first visit, the site follows the device color preference; choosing a theme saves `sintelium-theme` in localStorage for subsequent pages and visits on the same browser/origin. Choices synchronize across open tabs. If storage is blocked, the switch still works on the current page. Clear that browser's site data to return to device defaults. Without JavaScript, the light design remains readable and the inactive theme control is hidden.
+
+`src/theme-init.js` is inlined early in each generated head to apply the preference before painting. `src/theme.js` handles the accessible toggle, persistence, device preference changes, and browser toolbar color. `src/styles/themes.css` defines the dark palette and theme-aware logo treatment. The explicit CSS color scheme signals the designed palette to supporting browsers, but embedded browsers with forced color rewriting may still override website styles.
