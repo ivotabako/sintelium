@@ -28,3 +28,32 @@ const yearNode = document.querySelector('[data-current-year]');
 if (yearNode) {
   yearNode.textContent = new Date().getFullYear();
 }
+
+const settingsToggle = document.querySelector('.settings-toggle');
+const settingsPanel = document.querySelector('.settings-panel');
+function closeSettings() {
+  settingsPanel?.classList.remove('is-open');
+  settingsToggle?.setAttribute('aria-expanded', 'false');
+}
+if (settingsToggle && settingsPanel) {
+  settingsToggle.addEventListener('click', () => {
+    const open = settingsPanel.classList.toggle('is-open');
+    settingsToggle.setAttribute('aria-expanded', String(open));
+    if (open) {
+      nav?.classList.remove('is-open');
+      navToggle?.setAttribute('aria-expanded', 'false');
+      navToggle?.setAttribute('aria-label', document.documentElement.lang === 'es' ? 'Abrir menú' : 'Open menu');
+    }
+  });
+  navToggle?.addEventListener('click', closeSettings);
+  document.addEventListener('click', event => {
+    if (!settingsPanel.contains(event.target) && !settingsToggle.contains(event.target)) closeSettings();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && settingsPanel.classList.contains('is-open')) {
+      closeSettings();
+      settingsToggle.focus();
+    }
+  });
+  window.matchMedia('(max-width: 760px)').addEventListener('change', closeSettings);
+}

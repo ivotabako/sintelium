@@ -90,11 +90,16 @@ function buildNav(locale, pageId = 'home') {
           ${navLinks}
         </nav>
         <div class="nav-actions">
+          <button class="settings-toggle" type="button" aria-expanded="false" aria-controls="header-settings" aria-label="${locale === 'en' ? 'Settings' : 'Ajustes'}"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 3-1 3-3 1 1 3-2 2 2 2-1 3 3 1 1 3h6l1-3 3-1-1-3 2-2-2-2 1-3-3-1-1-3Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          <div id="header-settings" class="settings-panel" role="group" aria-label="${locale === 'en' ? 'Appearance and language' : 'Apariencia e idioma'}">
           <button class="theme-toggle" type="button" aria-label="${locale === 'en' ? 'Dark theme' : 'Tema oscuro'}" aria-pressed="false" hidden>
             <svg class="theme-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg>
             <svg class="theme-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+            <span class="settings-label">${locale === 'en' ? 'Dark theme' : 'Tema oscuro'}</span>
           </button>
+          <span class="settings-label language-label">${locale === 'en' ? 'Language' : 'Idioma'}</span>
           ${languageSwitch}
+          </div>
           ${cta ? `<div class="nav-cta">${cta}</div>` : ''}
           ${mobileToggle}
         </div>
@@ -117,7 +122,7 @@ function buildFooter(locale, pageId = 'home') {
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <a class="brand brand-footer" href="${routeFor('home', locale)}"><img class="brand-mark" src="${toProjectUrl('/images/logo-mark-reversed.svg')}" width="36" height="36" alt="" /><span>Sintelium</span></a>
+          <a class="brand brand-footer" href="${routeFor('home', locale)}"><span class="brand-symbol"><img class="brand-mark brand-mark-light" src="${toProjectUrl('/images/logo-mark.svg')}" width="36" height="36" alt="" /><img class="brand-mark brand-mark-dark" src="${toProjectUrl('/images/logo-mark-reversed.svg')}" width="36" height="36" alt="" /></span><span>Sintelium</span></a>
           <p>${locale === 'en' ? 'AI transformation and software engineering consultancy for clear, practical business outcomes.' : 'Consultoría de transformación con IA e ingeniería de software para resultados prácticos y claros.'}</p>
           ${site.contact.email ? `<a class="footer-link" href="mailto:${site.contact.email}">${site.contact.email}</a>` : ''}
         </div>
