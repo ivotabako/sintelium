@@ -1,5 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120">
-  <rect width="420" height="120" rx="26" fill="#F5F8F6"/>
-  <path d="M24 18c15-12 44-10 56 8 11 17 2 35-17 45l-16 10c-11 7-16 19-12 30 5 14 20 22 36 18l-5 12c-20 9-44 4-57-16-13-20-9-44 8-60l17-11c12-8 17-18 13-31-5-14-18-19-39-12l6-11Z" fill="#147D73"/>
-  <text x="120" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="50" font-weight="700" fill="#0B2422">Sintelium</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 112" role="img" aria-label="Sintelium">
+  <title>Sintelium</title>
+  <g transform="translate(4 4) scale(.72)">
+    <path d="M60 4 108 32V54L60 28 24 49 42 60V83L6 62V37Z" fill="#f2faf4"/>
+    <path d="M60 4 108 32V54L60 28Z" fill="#81cbb5"/>
+    <path d="M49 42 58 36 68 42V104L49 115Z" fill="#81cbb5"/>
+    <path d="M68 62 110 86V110L62 138V114L88 99 68 88Z" fill="#f2faf4"/>
+    <path d="M6 89 49 114V138L6 113Z" fill="#81cbb5"/>
+  </g>
+  <text x="110" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="58" font-weight="700" letter-spacing="-2" fill="#f2faf4">Sintelium</text>
 </svg>

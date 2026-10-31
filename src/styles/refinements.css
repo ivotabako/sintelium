@@ -81,3 +81,7 @@ section { padding:6rem 0; }
 /* Navigation stays available when JavaScript is disabled. */
 @media(max-width:760px) { html:not(.js) .site-nav { display:flex; } html:not(.js) .nav-toggle { display:none; } }
 @media(prefers-reduced-motion:reduce) { .button:hover { transform:none; } }
+
+/* Preserve the selected monogram proportions in both brand lockups. */
+.brand-mark { object-fit:contain; flex-shrink:0; }
+.site-footer .brand { display:inline-flex; align-items:center; gap:.7rem; }
