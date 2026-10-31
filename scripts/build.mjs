@@ -111,7 +111,7 @@ function buildFooter(locale, pageId = 'home') {
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <a class="brand brand-footer" href="${routeFor('home', locale)}">Sintelium</a>
+          <a class="brand brand-footer" href="${routeFor('home', locale)}"><img class="brand-mark" src="${toProjectUrl('/images/logo-mark-reversed.svg')}" width="36" height="36" alt="" /><span>Sintelium</span></a>
           <p>${locale === 'en' ? 'AI transformation and software engineering consultancy for clear, practical business outcomes.' : 'Consultoría de transformación con IA e ingeniería de software para resultados prácticos y claros.'}</p>
           ${site.contact.email ? `<a class="footer-link" href="mailto:${site.contact.email}">${site.contact.email}</a>` : ''}
         </div>

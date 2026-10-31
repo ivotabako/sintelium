@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 144" role="img" aria-label="Sintelium SI monogram">
+  <title>Sintelium SI monogram</title>
+    <path d="M60 4 108 32V54L60 28 24 49 42 60V83L6 62V37Z" fill="#f2faf4"/>
+    <path d="M60 4 108 32V54L60 28Z" fill="#81cbb5"/>
+    <path d="M49 42 58 36 68 42V104L49 115Z" fill="#81cbb5"/>
+    <path d="M68 62 110 86V110L62 138V114L88 99 68 88Z" fill="#f2faf4"/>
+    <path d="M6 89 49 114V138L6 113Z" fill="#81cbb5"/>
+</svg>
