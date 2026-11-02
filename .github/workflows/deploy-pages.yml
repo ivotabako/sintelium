@@ -31,17 +31,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate content
-        run: npm run validate
-
-      - name: Test
-        run: npm test
-
-      - name: Build site
-        run: npm run build
-
-      - name: Check built routes and assets
-        run: npm run check:dist
+      - name: Check source, tests, and production output
+        run: npm run check
 
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'

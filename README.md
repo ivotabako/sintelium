@@ -81,3 +81,7 @@ The header sun/moon button toggles the full site palette in either language. On 
 `src/theme-init.js` is inlined early in each generated head to apply the preference before painting. `src/theme.js` handles the accessible toggle, persistence, device preference changes, and browser toolbar color. `src/styles/themes.css` defines the dark palette and theme-aware logo treatment. The explicit CSS color scheme signals the designed palette to supporting browsers, but embedded browsers with forced color rewriting may still override website styles.
 
 On mobile (760px and below), appearance and language controls are grouped inside the header gear button. Navigation retains its own Menu button. Settings close on Escape, outside click, navigation opening, or breakpoint changes. Desktop controls remain inline. Light mode now uses light hero, diagram, and footer surfaces as well as light content sections; dark mode retains the forest palette.
+
+## Maintenance
+
+Repository implementation rules are in [AGENTS.md](AGENTS.md), with the module map and extension workflow in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). The reusable repository skill is [skills/maintain-site/SKILL.md](skills/maintain-site/SKILL.md). Run `npm run check` for the complete quality gate (`npm.cmd run check` in restricted PowerShell sessions). This includes syntax checks, content validation, behavior tests, production bundling, and internal link/asset verification.

@@ -1,14 +1,32 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { defineConfig } from 'vite';
-const site = JSON.parse(fs.readFileSync('content/site.json', 'utf8'));
-const root = path.resolve('src/generated');
-function htmlInputs(dir) {
-  return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? htmlInputs(path.join(dir, entry.name)) : entry.name.endsWith('.html') ? [path.join(dir, entry.name)] : []);
+import { readJson } from './scripts/lib/content.mjs';
+import { root, generatedDir, distDir } from './scripts/lib/paths.mjs';
+
+const site = readJson('site.json');
+function htmlInputs(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+    const file = path.join(directory, entry.name);
+    if (entry.isDirectory()) return htmlInputs(file);
+    return entry.name.endsWith('.html') ? [file] : [];
+  });
 }
+
 export default defineConfig({
-  root, base: `${site.basePath || ''}/`, publicDir: path.resolve('public'),
-  plugins: [{ name: 'source-entry', resolveId(id) { if (id === '/src/main.js') return path.resolve('src/main.js'); } }],
-  server: { fs: { allow: [process.cwd()] } },
-  build: { outDir: path.resolve('dist'), emptyOutDir: true, rollupOptions: { input: htmlInputs(root) } }
+  root: generatedDir,
+  base: (site.basePath || '') + '/',
+  publicDir: path.join(root, 'public'),
+  plugins: [{
+    name: 'source-entry',
+    resolveId(id) {
+      if (id === '/src/main.js') return path.join(root, 'src/main.js');
+    }
+  }],
+  server: { fs: { allow: [root] } },
+  build: {
+    outDir: distDir,
+    emptyOutDir: true,
+    rollupOptions: { input: htmlInputs(generatedDir) }
+  }
 });

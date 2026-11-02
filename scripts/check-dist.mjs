@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const root = process.cwd();
-const dist = path.join(root, 'dist');
+import { distDir as dist } from './lib/paths.mjs';
+import { readJson, loadContent } from './lib/content.mjs';
 const required = [
   'index.html',
   'en/index.html',
@@ -29,7 +29,7 @@ if (missing.length) {
   process.exit(1);
 }
 
-const site = JSON.parse(fs.readFileSync('content/site.json', 'utf8'));
+const site = readJson('site.json');
 const base = site.basePath || '';
 const pages = [];
 function walk(dir) {
@@ -53,5 +53,7 @@ for (const file of pages) {
   }
 }
 const sitemap = fs.readFileSync(path.join(dist, 'sitemap.xml'), 'utf8');
-if ((sitemap.match(/<loc>/g) || []).length !== 30) throw new Error('Expected all 30 localized routes in sitemap');
+const { pages: pageDefinitions, servicesData } = loadContent();
+const expectedRoutes = (Object.keys(pageDefinitions).length + servicesData.categories.length) * site.locales.length;
+if ((sitemap.match(/<loc>/g) || []).length !== expectedRoutes) throw new Error('Sitemap route count does not match content');
 console.log(`Dist validation succeeded: ${pages.length} bundled pages, internal links and assets checked.`);

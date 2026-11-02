@@ -1,13 +1,8 @@
-import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const root = path.resolve(process.cwd());
-const contentDir = path.join(root, 'content');
-
-function readJson(file) {
-  return JSON.parse(fs.readFileSync(path.join(contentDir, file), 'utf8'));
-}
+import { readJson } from './lib/content.mjs';
+import { validateRouting } from './lib/validate-routing.mjs';
 
 function hasLocaleValue(value) {
   return value && typeof value === 'object' && value.en !== undefined && value.es !== undefined;
@@ -23,10 +18,6 @@ function ensureLocalized(obj, label) {
   if (typeof obj.en !== 'string' || typeof obj.es !== 'string') {
     throw new Error(`${label} must contain string values for en and es`);
   }
-}
-
-function ensureString(value, label) {
-  if (typeof value !== 'string' || !value.trim()) throw new Error(`${label} must be a string`);
 }
 
 function validateJson() {
@@ -46,7 +37,7 @@ function validateJson() {
   if (!site.defaultLocale || !['en', 'es'].includes(site.defaultLocale)) throw new Error('site.defaultLocale must be en or es');
   if (!Array.isArray(site.locales) || !site.locales.includes('en') || !site.locales.includes('es')) throw new Error('site.locales must include en and es');
   if (!site.contact || typeof site.contact !== 'object') throw new Error('site.contact is required');
-  if (site.contact.email === null && site.contact.bookingUrl === null && allowUnconfiguredContact !== 'true') {
+  if (!site.contact.email && !site.contact.bookingUrl && allowUnconfiguredContact !== 'true') {
     throw new Error('At least one approved contact path must be configured before production. Set bookingUrl or email, or allow env ALLOW_UNCONFIGURED_CONTACT=true for local-only builds.');
   }
 
@@ -106,6 +97,7 @@ function validateJson() {
 
   if (legal.status !== 'requires-owner-legal-review') throw new Error('legal.status must be requires-owner-legal-review');
 
+  validateRouting({ site, pages, servicesData: services, navigation: nav });
   console.log('Content validation succeeded.');
 }
 
