@@ -1,13 +1,13 @@
 {
   "brand": "Sintelium",
-  "domain": "https://ivotabako.github.io",
+  "domain": "https://sintelium.eu",
   "defaultLocale": "en",
   "locales": [
     "en",
     "es"
   ],
   "contact": {
-    "email": null,
+    "email": "info@sintelium.eu",
     "bookingUrl": null
   },
   "social": {
@@ -23,5 +23,5 @@
     "mark": "/images/logo-mark.svg",
     "horizontal": "/images/logo-horizontal.svg"
   },
-  "basePath": "/sintelium"
+  "basePath": ""
 }

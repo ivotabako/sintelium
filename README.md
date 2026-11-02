@@ -66,13 +66,13 @@ Shared design tokens are in `src/styles/tokens.css`; the current visual system a
 
 ## Hosting paths
 
-`content/site.json` is the single source for `domain` (origin only) and `basePath` (no trailing slash). The existing project deployment uses `https://ivotabako.github.io` with `/sintelium`. Local preview is at `http://127.0.0.1:4173/sintelium/`. Run `npm run build` then `npm run preview`; use this production preview for final visual checks. `npm run dev` generates pages once; restart it after editing JSON or generator templates. CSS and JS edits update through Vite.
+`content/site.json` is the single source for `domain` (origin only) and `basePath` (no trailing slash). The configured custom domain is `https://sintelium.eu` with an empty base path. Local preview is at `http://127.0.0.1:4173/`. Run `npm run build` then `npm run preview`; use this production preview for final visual checks. `npm run dev` generates pages once; restart it after editing JSON or generator templates. CSS and JS edits update through Vite.
 
-For the intended custom domain, set `domain` to `https://sintelium.io` and `basePath` to an empty string, rebuild, and configure the verified domain in GitHub Pages. `public/CNAME` is included only for domain-root builds. Project builds remove it from output to avoid claiming the custom domain prematurely. Vite outputs localized pages directly into `dist`; finalization must never overwrite bundled HTML with raw templates.
+The build includes `public/CNAME` for `sintelium.eu`. Configure the domain in GitHub Pages and its DNS records with the domain provider before serving the site there. Project-path builds remove CNAME from output. Vite outputs localized pages directly into `dist`; finalization must never overwrite bundled HTML with raw templates.
 
 ## Launch configuration still required
 
-Contact email/booking URL are unset and legal pages are templates. Current builds allow these draft conditions explicitly so design review and the existing deployment remain possible; this is not a production-readiness gate. Do not treat a passing build as legal/contact approval. Complete the owner checklist in the specification before public launch.
+Contact email is configured as `info@sintelium.eu`; no booking service is configured. Legal pages remain templates. Current builds allow these draft conditions explicitly so design review and the existing deployment remain possible; this is not a production-readiness gate. Do not treat a passing build as legal/contact approval. Complete the owner checklist in the specification before public launch.
 
 ## Light and dark themes
 

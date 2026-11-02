@@ -18,11 +18,11 @@ test('root and localized homes have complete static document shells', () => {
 });
 test('service language switch and SEO map explicit translated counterparts', () => {
   const html = read('en/services/ai-transformation/index.html');
-  assert.match(html, /href="\/sintelium\/es\/servicios\/transformacion-ia\/" aria-label="Español"/);
-  assert.match(html, /hreflang="es" href="https:\/\/ivotabako.github.io\/sintelium\/es\/servicios\/transformacion-ia\/"/);
-  assert.match(html, /rel="canonical" href="https:\/\/ivotabako.github.io\/sintelium\/en\/services\/ai-transformation\/"/);
+  assert.match(html, /href="\/es\/servicios\/transformacion-ia\/" aria-label="Español"/);
+  assert.match(html, /hreflang="es" href="https:\/\/sintelium.eu\/es\/servicios\/transformacion-ia\/"/);
+  assert.match(html, /rel="canonical" href="https:\/\/sintelium.eu\/en\/services\/ai-transformation\/"/);
 });
-test('Spanish homepage has localized navigation, diagram and unavailable-contact text', () => {
+test('Spanish homepage has localized navigation and diagram', () => {
   const html = read('es/index.html');
   assert.match(html, /Saltar al contenido/);
   assert.match(html, /Abrir menú/);
@@ -32,10 +32,10 @@ test('Spanish homepage has localized navigation, diagram and unavailable-contact
 
 test('language labels resist browser translation and identify the current locale', () => {
   for (const [file, locale, enRoute, esRoute] of [
-    ['en/index.html', 'en', '/sintelium/en/', '/sintelium/es/'],
-    ['es/index.html', 'es', '/sintelium/en/', '/sintelium/es/'],
-    ['en/services/ai-transformation/index.html', 'en', '/sintelium/en/services/ai-transformation/', '/sintelium/es/servicios/transformacion-ia/'],
-    ['es/servicios/transformacion-ia/index.html', 'es', '/sintelium/en/services/ai-transformation/', '/sintelium/es/servicios/transformacion-ia/']
+    ['en/index.html', 'en', '/en/', '/es/'],
+    ['es/index.html', 'es', '/en/', '/es/'],
+    ['en/services/ai-transformation/index.html', 'en', '/en/services/ai-transformation/', '/es/servicios/transformacion-ia/'],
+    ['es/servicios/transformacion-ia/index.html', 'es', '/en/services/ai-transformation/', '/es/servicios/transformacion-ia/']
   ]) {
     const html = read(file);
     assert.match(html, /class="language-switch notranslate" translate="no" role="group"/);
@@ -63,5 +63,16 @@ test('authored locales opt out of automatic document translation', () => {
     assert.ok(html.includes('<html lang="' + locale + '" translate="no" class="notranslate">'));
     assert.match(html, /<meta name="google" content="notranslate" \/>/);
     assert.match(html, new RegExp('content-language" content="' + locale + '"'));
+  }
+});
+
+test('approved contact information is available on both localized contact pages', () => {
+  for (const file of ['en/contact/index.html', 'es/contacto/index.html']) {
+    const html = read(file);
+    assert.ok(html.includes('href="mailto:info@sintelium.eu"'));
+    assert.ok(html.includes('>info@sintelium.eu</a>'));
+    assert.doesNotMatch(html, /Contact details will be available soon|Los datos de contacto estar/);
+    assert.ok(html.includes('https://sintelium.eu/'));
+    assert.doesNotMatch(html, /ivotabako\.github\.io|sintelium\.io/);
   }
 });
