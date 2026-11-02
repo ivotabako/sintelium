@@ -112,6 +112,7 @@ function renderCommonHead({ locale, title, description, canonicalUrl, pageId = '
   return `
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google" content="notranslate" />
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeHtml(description)}" />
     <meta name="color-scheme" content="light dark" />
@@ -152,7 +153,7 @@ function renderPage({ locale, canonicalUrl, title, description, pageId, contentH
   const pageTitle = title || localeText(seoPage.title, locale) || 'Sintelium';
   const pageDescription = description || localeText(seoPage.description, locale) || '';
   return `<!DOCTYPE html>
-<html lang="${locale}">
+<html lang="${locale}" translate="no" class="notranslate">
   <head>
     ${renderCommonHead({ locale, title: pageTitle, description: pageDescription, canonicalUrl, pageId })}
   </head>

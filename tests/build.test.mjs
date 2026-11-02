@@ -51,3 +51,17 @@ test('language labels resist browser translation and identify the current locale
     }
   }
 });
+
+test('authored locales opt out of automatic document translation', () => {
+  for (const [file, locale] of [
+    ['en/index.html', 'en'],
+    ['es/index.html', 'es'],
+    ['en/services/ai-transformation/index.html', 'en'],
+    ['es/servicios/transformacion-ia/index.html', 'es']
+  ]) {
+    const html = read(file);
+    assert.ok(html.includes('<html lang="' + locale + '" translate="no" class="notranslate">'));
+    assert.match(html, /<meta name="google" content="notranslate" \/>/);
+    assert.match(html, new RegExp('content-language" content="' + locale + '"'));
+  }
+});

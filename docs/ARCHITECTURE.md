@@ -30,3 +30,7 @@ All renderer factories accept dependencies and return rendering functions. They 
 npm run check runs syntax checking, content validation, tests, production build, and distribution verification. CI runs the same command. npm run preview serves the built artifact; use the configured base path from content/site.json. On Windows, npm.cmd avoids PowerShell script execution policy issues.
 
 Draft builds currently allow unset contact configuration, as documented in README.md. Direct execution of scripts/validate-content.mjs is strict unless ALLOW_UNCONFIGURED_CONTACT=true is explicitly set. Neither mode grants legal approval.
+
+## Authored language selection
+
+English and Spanish are separate static documents selected through ordinary links. The document root opts out of automatic translation, with a matching Google translation hint, so browser translation does not replace the selected authored language after navigation. Preserve the actual locale in lang, metadata, and language link destinations.
