@@ -29,3 +29,25 @@ test('Spanish homepage has localized navigation, diagram and unavailable-contact
   assert.match(html, /03 \/ Resultados/);
   assert.doesNotMatch(html, /Contact details|Open menu|Skip to content/);
 });
+
+test('language labels resist browser translation and identify the current locale', () => {
+  for (const [file, locale, enRoute, esRoute] of [
+    ['en/index.html', 'en', '/sintelium/en/', '/sintelium/es/'],
+    ['es/index.html', 'es', '/sintelium/en/', '/sintelium/es/'],
+    ['en/services/ai-transformation/index.html', 'en', '/sintelium/en/services/ai-transformation/', '/sintelium/es/servicios/transformacion-ia/'],
+    ['es/servicios/transformacion-ia/index.html', 'es', '/sintelium/en/services/ai-transformation/', '/sintelium/es/servicios/transformacion-ia/']
+  ]) {
+    const html = read(file);
+    assert.match(html, /class="language-switch notranslate" translate="no" role="group"/);
+    const links = [...html.matchAll(/<a\b([^>]+)>(EN|ES)<\/a>/g)];
+    assert.equal(links.length, 4, 'header and footer each contain both language links');
+    for (const [, attributes, label] of links) {
+      const target = label.toLowerCase();
+      assert.ok(attributes.includes('href="' + (target === 'en' ? enRoute : esRoute) + '"'));
+      assert.ok(attributes.includes('lang="' + target + '"'));
+      assert.ok(attributes.includes('hreflang="' + target + '"'));
+      assert.ok(attributes.includes('translate="no"'));
+      assert.equal(attributes.includes('aria-current="page"'), target === locale);
+    }
+  }
+});

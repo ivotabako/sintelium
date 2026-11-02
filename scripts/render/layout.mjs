@@ -22,9 +22,9 @@ function buildNav(locale, pageId = 'home') {
     .join('');
 
   const languageSwitch = `
-    <div class="language-switch" aria-label="Language switcher">
-      <a href="${routeFor(pageId, 'en')}" aria-label="English" class="${locale === 'en' ? 'is-active' : ''}">EN</a>
-      <a href="${routeFor(pageId, 'es')}" aria-label="Español" class="${locale === 'es' ? 'is-active' : ''}">ES</a>
+    <div class="language-switch notranslate" translate="no" role="group" aria-label="${locale === 'en' ? 'Language' : 'Idioma'}">
+      <a href="${routeFor(pageId, 'en')}" aria-label="English" class="${locale === 'en' ? 'is-active' : ''}" lang="en" hreflang="en" translate="no"${locale === 'en' ? ' aria-current="page"' : ''}>EN</a>
+      <a href="${routeFor(pageId, 'es')}" aria-label="Español" class="${locale === 'es' ? 'is-active' : ''}" lang="es" hreflang="es" translate="no"${locale === 'es' ? ' aria-current="page"' : ''}>ES</a>
     </div>
   `;
 
@@ -96,8 +96,8 @@ function buildFooter(locale, pageId = 'home') {
           <ul class="footer-list">
             <li><a href="${privacyHref}">${locale === 'en' ? 'Privacy' : 'Privacidad'}</a></li>
             <li><a href="${legalHref}">${locale === 'en' ? 'Legal notice' : 'Aviso legal'}</a></li>
-            <li><a href="${routeFor(pageId, 'en')}">EN</a></li>
-            <li><a href="${routeFor(pageId, 'es')}">ES</a></li>
+            <li><a href="${routeFor(pageId, 'en')}" class="notranslate" lang="en" hreflang="en" translate="no"${locale === 'en' ? ' aria-current="page"' : ''}>EN</a></li>
+            <li><a href="${routeFor(pageId, 'es')}" class="notranslate" lang="es" hreflang="es" translate="no"${locale === 'es' ? ' aria-current="page"' : ''}>ES</a></li>
           </ul>
         </div>
       </div>
